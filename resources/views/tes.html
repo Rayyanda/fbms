@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center" style="height: 600px;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Sign In</h5>
+                    <form action="" method="POST">
+                        @csrf
+                        <label for="email" class="mb-2">Email Address: </label>
+                        <input type="text" id="email" name="email" placeholder="Enter your email address" required autofocus />
+                        <input type="text" id="email" name="email" placeholder="Enter your email address" required autofocus><br>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/karyawan/laporan/rekap/edit" method="post" class="form">
+        <div class="mb-0">
+            <input type="hidden" name="_token" value="${token}">
+        </div>
+        <div class="mb-1">
+            <label for="idKaryawan" class="form-label">ID Karyawan</label>
+            <input type="text" disabled name="id_karyawan" id="idKaryawan" value="" class="form-control form-control-color">
+        </div>
+        <div class="mb-1">
+            <label for="namaLengkap" class="form-label">Nama Lengkap</label>
+            <input type="text" disabled name="nama_lengkap" id="namaLengkap" value="" class="form-control">
+        </div>
+        <div class="mb-1">
+            <label for="jabatan" class="form-label">Posisi</label>
+            <select name="posisi" disabled id="jabatan" class="form-select">
+                <option selected >Kepala Staff</option>
+                <option value="Staff">Staff</option>
+            </select>
+        </div>
+        <div class="mb-1">
+            <label for="tanggalMasuk" class="form-label">Tanggal Masuk</label>
+            <input type="date" disabled name="tgl_masuk" id="tanggalMasuk" value="" class="form-control">
+        </div>
+        <div class="mb-1">
+            <label for="jamMasuk" class="form-label">Jam Masuk</label>
+            <input type="time" disabled name="jam_masuk" id="jamMasuk" value="" class="form-control">
+        </div>
+        <div class="mb-1">
+            <label for="jamPulang" class="form-label">Jam Pulang</label>
+            <input type="time" disabled name="jam_pulang" id="jamPulang" value="" class="form-control">
+        </div>
+        <div class="mb-1">
+            <button class="btn-close btn btn" >Batal</button>
+            <button type="submit" class="btn btn-success">Simpan</button>
+        </div>
+    </form>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafj" crossorigin="anonymous"></script>
+</body>
+</html>
