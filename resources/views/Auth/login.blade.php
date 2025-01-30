@@ -10,11 +10,11 @@
     <title>YudRs</title>
 </head>
 <body>
-    <nav class="navbar  border-bottom"> 
-        <div class="container-fluid"> 
+    <nav class="navbar  border-bottom">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">Yuds Restaurant</a>
-        </div> 
-    </nav> 
+        </div>
+    </nav>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
           <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -30,7 +30,7 @@
           <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
         </symbol>
       </svg>
-  
+
       <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
                 id="bd-theme"
@@ -66,14 +66,26 @@
         </ul>
       </div>
     <div class="container-xxl ">
-        <div class="d-flex justify-content-center align-items-center" style="height: 600px">
-            <div class="card shadow " style="width: 400px"> 
-                <div class="card-body"> 
-                    <h5 class="card-title text-center"><i class="bi bi-person"></i> Sign In</h5> 
-                    <form method="POST" action="/login" class="form-signin"> 
+        <div class="d-flex justify-content-center align-items-center flex-column" style="height: 600px">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Berhasil !</strong> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('err'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Gagal !</strong> {{ session('err') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <div class="card shadow " style="width: 400px">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><i class="bi bi-person"></i> Sign In</h5>
+                    <form method="POST" action="{{ route('user.login') }}" class="form-signin">
                         @csrf
                         <div class="mb-3">
-                            
+
                             <input type="email" required autofocus placeholder="Email Address" class="form-control" name="email" id="email" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3 d-flex flex-row">
@@ -96,7 +108,7 @@
             </div>
 
         </div>
-    </div>  
+    </div>
     <script src="{{asset('/js/dashboard.js')}}" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

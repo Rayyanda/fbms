@@ -2,20 +2,19 @@
 @section('title','Dashboard')
 @section('content')
     <div class="container-xxl" style="min-height:600px">
-        @if (count($data_pemasukan) <= 6)
+        {{-- @if (count($data_pemasukan) <= 6)
             <p> Data kurang dari 7 </p>
         @else
-        @endif
+        @endif --}}
         <canvas id="lineChart"></canvas>
         <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore aspernatur quam ut expedita eius autem tenetur necessitatibus fugiat maiores nemo neque et iste explicabo eum labore inventore, nisi placeat blanditiis.
         </p>
-        <p> <i class="bi bi-floppy"></i> {{ auth()->user()->name }}</p>
     </div>
     @php
         date_default_timezone_set('Asia/Jakarta');
         $today = date('dmy');
-            
+
         $tanggal = array_fill(0,7,"");
         $pemasukan = array_fill(0,7,0);
         $pengeluaran = array_fill(0,7,0);
@@ -32,7 +31,7 @@
         }
     @endphp
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
     <script >
         var ctxL = document.getElementById("lineChart").getContext('2d');
@@ -67,6 +66,6 @@
         options: {
             responsive: true
         }
-        });  
+        });
     </script>
 @endsection

@@ -64,6 +64,12 @@
                             <button class="btn btn-sm" onclick="btn_sort('karyawan/d/sort/posisi')" ><i class="bi bi-arrow-down-up"></i></button>
                         </div>
                     </th>
+                    <th scope="col" >
+                        <div class="d-flex justify-content-md-between align-items-center p-1">
+                            <p class="mb-0">Cabang</p>
+                            <button class="btn btn-sm" ><i class="bi bi-arrow-down-up"></i></button>
+                        </div>
+                    </th>
                 </thead>
                 <tbody>
                     @php
@@ -81,6 +87,7 @@
                             </td>
                             <td>{{$person->no_telp}}</td>
                             <td>{{$person->posisi}}</td>
+                            <td>{{ $person->cabang->nama_cabang }}</td>
                         </tr>
                     @endforeach
                 </tbody>

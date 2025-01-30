@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('karyawan', function (Blueprint $table) {
             $table->id();
-            $table->string('id_karyawan');
-            $table->unique('id_karyawan');
+            $table->foreignUuid('id_user')->references('id_user')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_karyawan')->unique();
             $table->string('nama');
             $table->string('no_telp');
             $table->text('alamat');
             $table->string('posisi');
-            $table->string('cabang');
-            $table->foreign('cabang')->references('cabang')->on('cabang');
+
+            $table->foreignUuid('id_cabang')->references('id_cabang')->on('cabang')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

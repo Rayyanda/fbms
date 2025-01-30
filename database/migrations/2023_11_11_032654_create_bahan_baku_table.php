@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->dateTime('terakhir_update');
             $table->string('cabang');
-            $table->foreign('cabang')->references('cabang')->on('cabang');
+            $table->foreignUuid('id_cabang')->references('id_cabang')->on('cabang');
             $table->timestamps();
         });
     }

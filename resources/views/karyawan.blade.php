@@ -3,13 +3,13 @@
 @section('content')
     <div class="container-xxl" style="min-height:600px">
         <div class="d-flex flex-wrap justify-content-md-start">
-            <div class="card mx-2 mb-4 card-hover" id="card_link"  onclick="card_link('karyawan/d')" >
+            <div class="card mx-2 mb-4 card-hover" id="card_link" @if(auth()->user()->role === 'admin')  onclick="card_link('admin/karyawan/d')" @else onclick="card_link('karyawan/d')" @endif >
                 <img class ="card-img-top" src="{{asset('/image/freelance-4071263_1280.png')}}" alt="">
                 <div class="card-body">
                     <h5 class="card-title text-center">Data Karyawan</h5>
                 </div>
             </div>
-            <div class="card mx-2 mb-4 card-hover" id="card_link"  onclick="card_link('karyawan/a')" >
+            <div class="card mx-2 mb-4 card-hover" id="card_link" @if(auth()->user()->role === 'admin')  onclick="card_link('admin/karyawan/a')" @else onclick="card_link('karyawan/a')" @endif  >
                 <img class="card-img-top " src="{{asset('/image/career-3478983_1280.jpg')}}" alt="">
                 <div class="card-body">
                     <h5 class="card-title text-center">Tambah Karyawan</h5>
@@ -31,6 +31,12 @@
                 <img class="card-img-top " src="{{asset('/image/survey-3957027_1280.jpg')}}" alt="">
                 <div class="card-body">
                     <h5 class="card-title text-center">Penggajian Karyawan</h5>
+                </div>
+            </div>
+            <div class="card mx-2 mb-4 card-hover" id="card_link" onclick="card_link('admin/register')" >
+                <img class="card-img-top " src="{{asset('/image/survey-3957027_1280.jpg')}}" alt="">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Menambahkan karyawan baru</h5>
                 </div>
             </div>
         </div>

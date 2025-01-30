@@ -24,7 +24,7 @@
                         <p class="col-md-3 fw-bold mb-0 text-info">Nama Pengguna</p>
                         <div class="col-md-3 mb-2">{{ auth()->user()->name }}</div>
                         <p class="col-md-3 fw-bold mb-0 text-info">Cabang</p>
-                        <div class="col-md-3 mb-2">{{ auth()->user()->cabang }}</div>
+                        <div class="col-md-3 mb-2">{{ auth()->user()->karyawan->cabang->nama_cabang }}</div>
                     </div>
                     <div class="row">
                         <p class="col-md-3 fw-bold mb-0 text-info">Email</p>
@@ -83,7 +83,7 @@
                 </tr>
                 @endif
             </tbody>
-        </table>        
+        </table>
     </div>
     @elseif($rekap != null)
     <div class="d-flex mb-2 justify-content-start align-items-center ">
@@ -138,8 +138,8 @@
                     <td>
                         <div class="d-flex justify-content-{{$item->jam_keluar == "" ? "between" : "center"}} align-items-center">
                             @if ($item->jam_keluar == "")
-                            <a href="/karyawan/absensi/rekap/{{$item->id_absensi}}" title="Edit" 
-                                
+                            <a href="/karyawan/absensi/rekap/{{$item->id_absensi}}" title="Edit"
+
                                 class="text-decoration-none "><i class="bi bi-pencil"></i></a>
                             @endif
                             <a data-bs-toggle="modal" data-bs-target="#mySecondModal" onclick="tampilSecondModal('hapusRekapAbs',['{{$item->id_absensi}}','{{$item->nama}}-{{$item->tanggal}}'])"  title="Hapus" class="text-decoration-none"><i class="bi bi-trash"></i></a>
@@ -148,10 +148,10 @@
                 </tr>
                 @endforeach
             </tbody>
-        </table>        
+        </table>
     </div>
     @if (count($rekap) > 9)
-        
+
     @endif
     {{$rekap->links("pagination::bootstrap-5")}}
     <script>
@@ -271,6 +271,6 @@
         </div>
     </form>
     @endif
-                
+
 </div>
 @endsection

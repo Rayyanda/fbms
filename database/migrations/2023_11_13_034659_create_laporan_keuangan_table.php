@@ -23,8 +23,7 @@ return new class extends Migration
             $table->integer('laba_kotor');
             $table->integer('laba_bersih');
             $table->text('keterangan');
-            $table->string('cabang');
-            $table->foreign('cabang')->references('nama_cabang')->on('cabang');
+            $table->foreignUuid('id_cabang')->references('id_cabang')->on('cabang');
             $table->timestamps();
         });
     }

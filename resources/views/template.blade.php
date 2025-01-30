@@ -16,7 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    
+
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -70,7 +70,7 @@
       </ul>
     </div>
 
-    
+
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   <symbol id="cart" viewBox="0 0 16 16">
     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -146,7 +146,7 @@
 </svg>
 
 <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">Yuds Restaurant</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">FBMS</a>
 
   <ul class="navbar-nav flex-row d-md-none">
     <li class="nav-item text-nowrap">
@@ -174,7 +174,11 @@
           <li class="nav-item">
             <a href="/profile" class="nav-link d-flex flex-column align-items-center gap-2">
               <img src="{{asset('/image/blank-profile-picture-973460_1280.png')}}" class="" style="border-radius: 50px" width="100px" alt="">
-              {{ auth()->user()->name }} - {{ auth()->user()->cabang }}
+              @if (auth()->user()->role === 'admin')
+                {{ auth()->user()->name }} - {{ auth()->user()->role }}
+            @else
+            {{ auth()->user()->name }} - {{ auth()->user()->karyawan->posisi }}
+              @endif
             </a>
           </li>
           <li class="nav-item">
@@ -190,7 +194,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" id="nav-link-karyawan" href="/karyawan">
+            <a class="nav-link d-flex align-items-center gap-2" id="nav-link-karyawan" href="{{ route('karyawan.index') }}">
               <i class="bi bi-person-gear"></i>
               Karyawan
             </a>
@@ -254,10 +258,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer text-center" id="modal-footer">
-        
+
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -273,10 +277,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="mySecondModalBody">
-        
+
       </div>
       <div class="modal-footer" id="mySecondModalFooter">
-        
+
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>

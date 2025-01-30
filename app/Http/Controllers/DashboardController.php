@@ -11,20 +11,32 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+
+    public function home()
+    {
+        switch (auth()->user()->role) {
+            case 'admin':
+                return redirect()->route('admin.dashboard');
+
+            default:
+                return redirect()->route('employee.dashboard');
+        }
+    }
+
     public function index(){
         date_default_timezone_set('Asia/Jakarta');
         $today = date('dmy');
         $data_pemasukan = DB::table('pemasukan')
             ->select('tanggal_masuk',DB::raw('SUM(jumlah) as total_jumlah'))
-            ->where('cabang',auth()->user()->cabang)
+            // ->where('cabang',auth()->user()->cabang)
             ->where('tanggal_masuk','>=',DB::raw('DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)'))
             ->groupBy('tanggal_masuk')
             ->orderBy('tanggal_masuk','desc')
             ->get();
-        
+
         $data_pengeluaran = DB::table('pengeluaran')
             ->select('tanggal',DB::raw('SUM(jumlah) as total_jumlah'))
-            ->where('cabang',auth()->user()->cabang)
+            // ->where('cabang',auth()->user()->cabang)
             ->where('tanggal','>=',DB::raw('DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)'))
             ->groupBy('tanggal')
             ->orderBy('tanggal','desc')
@@ -33,37 +45,25 @@ class DashboardController extends Controller
         return view("dashboard",['data_pemasukan'=>$data_pemasukan,'data_pengeluaran'=>$data_pengeluaran]);
     }
 
-    
-
-    public function login()
+    public function admin()
     {
-        if (Auth::check()) {
-            
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('dmy');
+        $data_pemasukan = DB::table('pemasukan')
+            ->select('tanggal_masuk',DB::raw('SUM(jumlah) as total_jumlah'))
+            ->where('tanggal_masuk','>=',DB::raw('DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)'))
+            ->groupBy('tanggal_masuk')
+            ->orderBy('tanggal_masuk','desc')
+            ->get();
 
-            return redirect('/');
-        }else{
-            return view('login');
-        }
+        $data_pengeluaran = DB::table('pengeluaran')
+            ->select('tanggal',DB::raw('SUM(jumlah) as total_jumlah'))
+            ->where('tanggal','>=',DB::raw('DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)'))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal','desc')
+            ->get();
+
+        return view("dashboard",['data_pemasukan'=>$data_pemasukan,'data_pengeluaran'=>$data_pengeluaran]);
     }
-    public function login_user(Request $request){
-        $email = $request->input('email');
-        $data = [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ];
-        session(['email'=>$email]);
-        if (Auth::Attempt($data)) {
-            $user = DB::table('users')->where('email',$email)->get();
-            
-            return redirect('/');
-        }else{
-            Session::flash('err', 'Email atau Password Salah');
-            return redirect('/login');
-        }
-    }
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/login');
-    }
+
 }

@@ -19,8 +19,7 @@ return new class extends Migration
             $table->dateTime('tanggal_masuk')->nullable()->default(now());
             $table->integer('jumlah');
             $table->text('keterangan');
-            $table->string('cabang');
-            $table->foreign('cabang')->references('cabang')->on('cabang');
+            $table->foreignUuid('id_cabang')->references('id_cabang')->on('cabang');
             $table->timestamps();
         });
     }

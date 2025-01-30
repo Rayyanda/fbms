@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penggajian', function (Blueprint $table) {
+        Schema::create('cabang', function (Blueprint $table) {
             $table->id();
-            $table->string('id_penggajian');
-            
+            $table->uuid('id_cabang')->unique();
+            $table->string('nama_cabang')->unique();
+            $table->string('alamat')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penggajian');
+        Schema::dropIfExists('cabang');
     }
 };

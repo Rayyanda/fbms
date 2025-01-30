@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('id_absensi');
             $table->unique('id_absensi');
             $table->string('id_karyawan');
-            $table->foreign('id_karyawan')->references('karyawan')->on('id_karyawan');
+            $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan');
             $table->date('tanggal');
             $table->time('jam_masuk');
             $table->time('jam_keluar');

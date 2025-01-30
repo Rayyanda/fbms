@@ -18,7 +18,7 @@ class AbsensiKaryawan extends Model
         $today = date('d');
         return $this->join('karyawan','absensi_karyawan.id_karyawan','=','karyawan.id_karyawan')
             ->select('absensi_karyawan.*','karyawan.nama','karyawan.posisi')
-            ->where('karyawan.cabang',auth()->user()->cabang)
+            ->where('karyawan.id_cabang',auth()->user()->karyawan->cabang->id_cabang)
             ->whereRaw("DATE_FORMAT(tanggal, '%d') = $today")
             ->get();
     }
@@ -28,13 +28,13 @@ class AbsensiKaryawan extends Model
         if($tanggal != null){
             return $this->join('karyawan','absensi_karyawan.id_karyawan','=','karyawan.id_karyawan')
                 ->select('absensi_karyawan.*','karyawan.nama','karyawan.posisi')
-                ->where('karyawan.cabang',auth()->user()->cabang)
+                ->where('karyawan.id_cabang',auth()->user()->karyawan->cabang->id_cabang)
                 ->where('tanggal',$tanggal)
                 ->paginate(10);
         }else{
             return $this->join('karyawan','absensi_karyawan.id_karyawan','=','karyawan.id_karyawan')
                 ->select('absensi_karyawan.*','karyawan.nama','karyawan.posisi')
-                ->where('karyawan.cabang',auth()->user()->cabang)
+                ->where('karyawan.id_cabang',auth()->user()->karyawan->cabang->id_cabang)
                 ->orderBy('tanggal','desc')
                 ->paginate(18);
         }
@@ -91,7 +91,7 @@ class AbsensiKaryawan extends Model
     }
     public function getPercentageThisMonth()
     {
-        
+
         date_default_timezone_set('Asia/Jakarta');
         $this_month = date('m');
         $total_days = Carbon::create(date('Y'),date('m'),1)->daysInMonth;
